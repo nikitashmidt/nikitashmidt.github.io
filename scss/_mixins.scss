@@ -1,0 +1,66 @@
+@mixin modal{
+    transition: 0.3s all;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 50%;
+    text-align: center;
+    z-index: 13;
+    @include hiddenElem;
+    position: fixed;
+}
+@mixin modalDelete{
+    @include hiddenElem;
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    min-height: 200px;
+    text-align: center;
+    z-index: 13;
+    background-color: rgb(83, 83, 83);
+    transition: 0.5s all;
+    border-radius: 0.25rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+@mixin flex-v-center{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+@mixin hiddenElem{
+    opacity: 0;
+    visibility: hidden;
+}
+@mixin visibleElem{
+    opacity: 1;
+    visibility: visible;
+}
+@mixin btnModal{
+    display: block;
+    border: 0;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    color: white;
+    transition: 0.5s all;
+    background-color: #005cbf;
+    &:first-child{
+        background-color: #ff0000;
+    }
+    &:hover{
+        opacity: 0.3;
+    }
+}
+@mixin btns{
+    @include flex-v-center;
+    gap: 25px;
+    margin-bottom: 20px;
+}

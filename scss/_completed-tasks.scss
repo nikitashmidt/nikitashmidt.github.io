@@ -1,0 +1,99 @@
+.completed-tasks{
+    position: relative;
+    margin-bottom: 50px;
+    @include mini-tablet{
+        margin-bottom: 80px;
+    }
+    &-block{
+        display: none;
+        align-items: center;
+        gap: 10px;
+        background-color:rgba(0, 128, 0, 0.534);
+        border-radius: 0.25rem;
+        padding: 10px;
+        cursor: pointer;
+        color: white;
+        margin-bottom: 10px;
+        animation: animation-drop 1s ;
+        img{
+            transition: 0.5s all;   
+        }
+        &:hover{
+            .completed-tasks-arrow{
+                img{
+                    transform: scale(1.2);
+                }
+            }
+            .completed-tasks-icons{
+                svg {
+                   
+                    path{
+                        fill: white;
+                        &:first-child{
+                            transform: translateX(5px);
+                        }
+                    }
+                }
+            }
+        }
+        &-active{
+            display: flex;
+        }
+    }
+    &-lists{
+        display: none;
+        width: 100%;
+        margin-bottom: 50px;
+        animation: animation-drop 1s ;
+        li{
+            span{
+                text-decoration:line-through;
+                color: #CDCDCD;
+                pointer-events: none;
+            }
+        }
+        &-active{
+            display: block;
+        }
+    }
+    &-empty{
+        display: block;
+        border: 0;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: 0.3rem;
+        background-color: red;
+        color: white;
+        transition: 0.5s all;
+        opacity: 0.5;
+        &:hover{
+            opacity: 0.9;
+         }
+         &:active{
+         transform: scale(0.9);
+        }
+    }
+    &-title{
+        font-size: 18px;
+        margin: 0;
+    }
+    &-arrow{
+        cursor: pointer;
+        border-radius: 0.25rem;
+        padding-bottom: 6px;
+        transition: 0.3s all;
+    }
+}
+.rotate{
+    transform: rotate(180deg);
+}
+@keyframes animation-drop {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}

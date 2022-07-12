@@ -1,0 +1,16 @@
+.header{
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    &__title{
+        @include mobile {
+            font-size: 2.5rem ;
+        }
+        span{
+            color: #005cbf;
+        }
+    }
+    &__time, &__number-tasks span{
+        color: red;
+    }
+}

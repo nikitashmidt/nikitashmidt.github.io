@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import './media';
+@import './completed-tasks';
+@import './mixins';
+@import './header';
+@import './modal';
+@import './overlay';
+@import './btn';
+@import './task';
+@import './loader';
+@import './checkbox';
+
+
+html, body {
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background-color: #4b4c4e;
+    padding-top: 30px;
+}
+// .body{
+//     &-hidden{
+//         padding-right: 5px;
+//         overflow: hidden;
+//         @include mini-desktop{
+//           padding-right: 0;
+//         }
+//     }
+// }
+#element::-webkit-scrollbar {
+  width: 6px;
+  background-color: #005cbf;
+}
+#element::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #005cbf;
+}
+#element::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background-color: #f9f9fd;
+}
+.container{
+  position: relative;
+  padding-bottom: 50px;
+  transition:1s all;
+  // opacity: 0;
+  @include tablet{
+    max-width: 95%;
+  }
+  @include mobile {
+    padding: 0;
+  }
+  &-animation{
+    opacity: 1;
+  }
+}
+.aside {
+  height: 400px;
+}
+.main {
+  height: 400px;
+}
+.d-flex {
+  display: flex;
+}
+.gray {
+  color: #BDBDBD;
+}
+.task-title--done {
+  text-decoration: line-through;
+  color: #CDCDCD;
+}
+.task-item__buttons {
+  display: flex;
+  column-gap: 5px;
+}
+.notify-holder {
+  height: 60px;
+  margin-bottom: 20px;
+}
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.empty-list__title {
+  font-size: 28px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  font-weight: 300;
+  text-align: center;
+  @include mobile {
+    font-size: 24px;
+  }
+}
+.empty-list__icon {
+  color: #42BE2A;
+  font-size: 32px;
+}
+.btn-action {
+    background-color: #e0e5ea;
+    padding: 8px 10px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    transition: opacity 0.2s ease-in;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-action {
+  transition: 0.3s all;
+    &:hover{
+      background-color: #e0e5ea;
+      opacity: 1;
+    }
+    &:active{
+      transform: scale(0.9);
+    }
+}
+
+.btn-action img {
+  pointer-events: none;
+}
+.none {
+  display: none !important;
+}
+.float-right {
+  float: right;
+}
+.list-group-item{
+  transition: 0.5s all;
+  border-radius: 0.25rem !important;
+  margin-bottom: 5px;
+  &-delete{
+      transform: translateY(-1000px);
+  }
+}

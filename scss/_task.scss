@@ -1,0 +1,34 @@
+.task{
+    &-title {
+        font-weight: 400;
+        word-break:break-all;
+        cursor: pointer;
+        transition: 0.9s all;
+        border-radius: 0.25rem;
+        padding: 10px;
+        @include mobile {
+            padding: 5px;
+            padding-right: 10px;
+        }
+        &:hover{
+            &::after{
+                opacity: 1;
+            }
+        }
+        &::after{
+            content: url('../img/edit.svg');
+            padding-left: 10px;
+            opacity: 0;
+            transition: 0.3s all;
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
+    }
+    &-item{
+        &__buttons{
+            height: 40px;
+            flex-shrink: 0;
+        }
+    }
+}

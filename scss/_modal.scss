@@ -1,0 +1,112 @@
+.modal{
+    &-task{
+        @include modal;
+        @include mini-desktop{
+            min-width: 70%;
+        }
+        @include tablet {
+            min-width: 90%;
+        }
+        @include mobile {
+            min-width: 90%;
+            top: 50%;
+        }
+        &-active{
+            top: 50%;
+            @include visibleElem;
+        }
+    }
+    &-delete{
+       @include modalDelete;
+        &-title{
+            margin-top: 30px;
+            font-size: 25px;    
+        }
+        &-active{
+            @include visibleElem;
+            top: 50%;
+        }
+        &-btns{
+           @include btns;
+        }
+        &-descr{
+            padding: 10px;
+        }
+        &-span{
+            word-break:break-all;
+        }
+        button{
+            @include btnModal;
+        }
+        @include mini-tablet{
+            width: 500px;
+        }
+        @include mobile {
+            width: 90%;
+        }
+    }
+    &-done{
+        position: fixed;
+        top: -30%;
+        left: 50%;
+        width: 300px;
+        font-size: 19px;
+        transform: translateX(-50%);
+        min-height: 100px;
+        background-color: green;
+        color: #fff;
+        text-align: center;
+        border-radius: 0.25rem;
+        transition: 0.5s all;   
+        z-index: 13;
+        @include hiddenElem;
+        @include mobile {
+            width: 290px;
+        }
+        &-descr{
+            padding: 30px 10px 15px 10px;
+           word-break:break-all;
+           margin: 0;   
+           @include mini-tablet {
+                padding: 15px;
+           }
+        }
+        &-active{
+            @include visibleElem;
+            top:3%;
+        }
+        &-icon{
+            @include flex-v-center;
+            padding-bottom: 20px;
+            @include mini-tablet{
+                display: none;
+            }
+        }
+        &-circle{
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            border-radius: 100%;
+            position: absolute; 
+            transform: translateX(-50%);
+            left: 50%; 
+        }
+    }
+    &-trash{
+       @include modalDelete;
+       &-title{
+            margin-top: 30px;
+            font-size: 25px;    
+       }
+        &-btns{
+            @include btns;
+        }
+        button{
+            @include btnModal;
+        }
+        &-active{
+            @include visibleElem;
+            top: 50%;
+        }
+    }
+}
