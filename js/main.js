@@ -16,6 +16,7 @@ const form = document.getElementById('form'),
     removeDoneTasksBtn = document.querySelector('#removeDoneTasks'),
     modalDone = document.querySelector('.modal-done'),
     modalDoneSpan = modalDone.querySelector('.modal-done-span'),
+    modalComments = document.querySelector('.modal-comments'),
     completedTasksBlock = document.querySelector('.completed-tasks-block'),
     completedTasksArrow = document.querySelector('.completed-tasks-arrow'),
     completedTasksLists = document.querySelector('.completed-tasks-lists'),
@@ -40,6 +41,7 @@ updateEmpty();
 form.addEventListener('submit', addTask);
 tasksList.addEventListener('click', deleteTask);
 tasksList.addEventListener('click', doneTask);
+tasksList.addEventListener('click', openModalComments);
 openModalBtn.addEventListener('click', openModal);
 overlay.addEventListener('click', closeModal);
 modalCancelBtn.forEach(item=> item.addEventListener('click', closeModal))
@@ -184,6 +186,7 @@ function closeModal() {
     if (modalDelete.classList.contains('modal-delete-active')) modalDelete.classList.remove('modal-delete-active');
     if (modal.classList.contains('modal-task-active')) modal.classList.remove('modal-task-active');
     if (modalTrash.classList.contains('modal-trash-active')) modalTrash.classList.remove('modal-trash-active');
+    if (modalComments.classList.contains('modal-comments-active')) modalComments.classList.remove('modal-comments-active');
     enableScroll();
     transition('10px');
 }
@@ -196,7 +199,7 @@ function removeDoneTasks(e) {
     document.querySelectorAll('.task-title').forEach(item => {
         if (item.classList.contains('task-title--done')) { 
           const tasksHTML =   `<li id="${item.parentNode.id}" class="completed-tasks-list  list-group-item d-flex justify-content-between task-item">
-          <span class="task-title"> ${item.parentNode.textContent} </span>
+          <span class="task-title" data-action='task-title'> ${item.parentNode.textContent} </span>
           <div class="task-item__buttons">
               <button type="button" data-action="done" class="btn-action return-task">
                   Вернуть задачу
@@ -215,7 +218,7 @@ function updateLocalStorage() {
 function renderTask(task) {
     const cssClass = task.done ? 'task-title task-title--done' : 'task-title';
     const taskHTML = `<li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
-        <span class="${cssClass}"> ${task.text}  </span>
+        <span class="${cssClass}" data-action='task-title'> ${task.text}  </span>
         <div class="task-item__buttons">
             <button type="button" data-action="done" class="btn-action">
                 <img src="./img/tick.svg" alt="Done" width="18" height="18">
@@ -229,7 +232,7 @@ function renderTask(task) {
 }
 function renderCompletedTask(task) {
     const tasksHTML = `<li id="${task.id}" class="completed-tasks-list list-group-item d-flex justify-content-between task-item">
-          <span class="task-title"> ${task.text} </span>
+          <span class="task-title" data-action='task-title'> ${task.text} </span>
           <div class="task-item__buttons">
               <button type="button" data-action="done" class="btn-action return-task">
                   Вернуть задачу
@@ -266,7 +269,7 @@ function returnTasks(e) {
     }
     completedTasks = completedTasks.filter(task => task.id !== id);
     const taskHTML = `<li id="${parentNode.id}" class="list-group-item d-flex justify-content-between task-item">
-    <span class="task-title"> ${parentNode.children[0].textContent}  </span>
+    <span class="task-title" data-action='task-title'> ${parentNode.children[0].textContent}  </span>
     <div class="task-item__buttons">
         <button type="button" data-action="done" class="btn-action">
             <img src="./img/tick.svg" alt="Done" width="18" height="18">
@@ -296,7 +299,16 @@ function emptyTrash(e) {
         closeModal();
     }, { once: true });
 }
-function renderCommentsModal() {
-    
+function openModalComments(e) {
+    if (e.target.dataset.action !== "task-title") return;   
+    const id = +e.target.parentNode.id;
+    const newTasks = tasks.filter(item => item.id === id);
+    document.querySelector('.modal-comments__title').value = `${e.target.textContent.trim()}`;
+    document.querySelector('.modal-comments__date').textContent = `${newTasks[0].date}`;
+    document.querySelector('.modal-comments__time').textContent = `${newTasks[0].time}`;
+    modalComments.classList.add('modal-comments-active');
+    overlay.classList.add('overlay-active');
+    disableScroll()
+    transition('-50%');
 }
 

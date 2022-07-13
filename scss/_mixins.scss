@@ -51,7 +51,7 @@
     border-radius: 0.3rem;
     color: white;
     transition: 0.5s all;
-    background-color: #005cbf;
+    background-color: $main-color;
     &:first-child{
         background-color: #ff0000;
     }

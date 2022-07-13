@@ -115,4 +115,61 @@
             width: 90%;
         }
     }
+    &-comments{
+        @include hiddenElem;
+        background-color: rgb(85, 82, 82);
+        width: 55%;
+        min-height: 400px;
+        z-index: 20;
+        position: fixed;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 0.3s all;
+        padding: 15px;
+        color: white;
+        border-radius: 0.25rem;
+        text-align: center;
+        @include mini-desktop{
+            width: 80%;
+        }
+        hr{
+            background-color: #fff;
+        }
+        &-active{
+            @include visibleElem;
+            top: 50%;
+        }
+        &__title{
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            background-color: #555252;
+            color: white;
+            border: none;
+            font-size: 21px;
+            text-align: center;
+            @include tablet {
+                overflow: auto;
+                white-space: inherit;
+                text-overflow: inherit;
+            }
+        }
+        &__bottom{
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            width: 100%;
+        }
+        &__input{
+            width: 95%;
+            text-align: center;
+            margin-bottom: 10px;
+            height: 35px;
+            &:focus{
+                box-shadow: 1px 1px 1px 1px rgb(41, 29, 148);
+            }
+        }
+    }
 }

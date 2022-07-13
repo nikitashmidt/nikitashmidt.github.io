@@ -135,9 +135,9 @@
 }
 
 .completed-tasks-lists li span {
+  pointer-events: none;
   text-decoration: line-through;
   color: #CDCDCD;
-  pointer-events: none;
 }
 
 .completed-tasks-lists-active {
@@ -528,6 +528,81 @@
   }
 }
 
+.modal-comments {
+  opacity: 0;
+  visibility: hidden;
+  background-color: #555252;
+  width: 55%;
+  min-height: 400px;
+  z-index: 20;
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+  padding: 15px;
+  color: white;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .modal-comments {
+    width: 80%;
+  }
+}
+
+.modal-comments hr {
+  background-color: #fff;
+}
+
+.modal-comments-active {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+
+.modal-comments__title {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: #555252;
+  color: white;
+  border: none;
+  font-size: 21px;
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  .modal-comments__title {
+    overflow: auto;
+    white-space: inherit;
+    text-overflow: inherit;
+  }
+}
+
+.modal-comments__bottom {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+}
+
+.modal-comments__input {
+  width: 95%;
+  text-align: center;
+  margin-bottom: 10px;
+  height: 35px;
+}
+
+.modal-comments__input:focus {
+  -webkit-box-shadow: 1px 1px 1px 1px #291d94;
+          box-shadow: 1px 1px 1px 1px #291d94;
+}
+
 .overlay {
   opacity: 0;
   visibility: hidden;
@@ -663,6 +738,7 @@
   transition: 0.9s all;
   border-radius: 0.25rem;
   padding: 10px;
+  width: 100%;
 }
 
 @media (max-width: 576px) {
@@ -682,6 +758,13 @@
   opacity: 0;
   -webkit-transition: 0.3s all;
   transition: 0.3s all;
+  position: absolute;
+}
+
+@media (max-width: 992px) {
+  .task-title::after {
+    content: '';
+  }
 }
 
 .task-title::after:hover {
@@ -693,6 +776,16 @@
   height: 40px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
+}
+
+#tasksList li:hover {
+  background-color: #dad8d8;
+}
+
+@media (max-width: 992px) {
+  #tasksList li:hover {
+    background-color: #fff;
+  }
 }
 
 .form-group-checkbox {

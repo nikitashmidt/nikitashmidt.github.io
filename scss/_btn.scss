@@ -7,11 +7,11 @@
         font-size: 1.25rem;
         line-height: 1.5;
         border-radius: 0.3rem;
-        background-color: #005cbf;
+        background-color: $main-color;
         color: white;
         transition: 0.5s all;
         &:hover{
-            color: #005cbf;
+            color: $main-color;
             background-color: #fff;
          }
         &:active{
@@ -34,7 +34,7 @@
     }
     &-primary{
         &:hover{
-            color: #005cbf !important;
+            color: $main-color !important;
             background-color: #fff !important;
          }
          &:active{

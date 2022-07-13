@@ -6,6 +6,7 @@
         transition: 0.9s all;
         border-radius: 0.25rem;
         padding: 10px;
+        width: 100%;
         @include mobile {
             padding: 5px;
             padding-right: 10px;
@@ -20,6 +21,10 @@
             padding-left: 10px;
             opacity: 0;
             transition: 0.3s all;
+            position: absolute;
+            @include tablet{
+                content: '';
+            }
             &:hover{
                 transform: scale(1.2);
             }
@@ -31,4 +36,12 @@
             flex-shrink: 0;
         }
     }
+}
+#tasksList li {
+   &:hover{
+        background-color: rgb(218, 216, 216);
+        @include tablet{
+            background-color: #fff;
+        }
+   }
 }

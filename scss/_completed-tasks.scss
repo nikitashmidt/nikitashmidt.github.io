@@ -47,9 +47,9 @@
         animation: animation-drop 1s ;
         li{
             span{
+                pointer-events: none;
                 text-decoration:line-through;
                 color: #CDCDCD;
-                pointer-events: none;
             }
         }
         &-active{
