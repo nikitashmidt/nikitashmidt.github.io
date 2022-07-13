@@ -36,6 +36,7 @@ tasks.forEach(task => renderTask(task));
 completedTasks.forEach(task=> renderCompletedTask(task))
 updateEmpty();
 
+
 form.addEventListener('submit', addTask);
 tasksList.addEventListener('click', deleteTask);
 tasksList.addEventListener('click', doneTask);
@@ -44,36 +45,36 @@ overlay.addEventListener('click', closeModal);
 modalCancelBtn.forEach(item=> item.addEventListener('click', closeModal))
 removeDoneTasksBtn.addEventListener('click', removeDoneTasks);
 completedTasksBlock.addEventListener('click', completedTasksUp);
-// emptyTrashBtn.addEventListener('click', emptyTrash);
+emptyTrashBtn.addEventListener('click', emptyTrash);
 completedTasksLists.addEventListener('click', returnTasks);
 window.document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay.classList.contains('overlay-active')) closeModal();
 })
-// window.onload = function () {
-//     window.setTimeout(() => {
-//         loader.classList.remove('loader-active');
-//         container.classList.add('container-animation');
-//         setTimeout(() => {
-//             document.querySelector('.body').classList.remove('body-hidden');
-//             loader.style.display = 'none';
-//         }, 400)
-//     }, 1000)
-// }
-setInterval( () => {
+
+window.onload = function () {
+    window.setTimeout(() => {
+        loader.classList.remove('loader-active');
+        container.classList.add('container-animation');
+        setTimeout(() => {
+            document.querySelector('.body').classList.remove('body-hidden');
+            loader.style.display = 'none';
+        }, 400)
+    }, 1000)
+}
+
+setInterval(() => {
     let now = new Date();
-    let nowGetDay = `${now.getDate()}`; 
-    let nowGetMonth = `${now.getMonth() + 1}`; 
-    let nowGetYear = `${now.getFullYear()}`;
-    nowGetDay < 10 ? nowGetDay = 0 + nowGetDay : nowGetDay;
-    nowGetMonth < 10 ? nowGetMonth = 0 + nowGetMonth : nowGetMonth;
-    headerTime.innerHTML = `${nowGetDay}.${nowGetMonth}.${nowGetYear} ${now.toLocaleTimeString()} `;
+    headerTime.innerHTML = `${now.toLocaleDateString()} ${now.toLocaleTimeString()} `;
 }, 1000);
+
 function addTask(e) {
     e.preventDefault();
     const newTask = {
         id: Date.now(),
         text: taskInput.value,
-        done: false
+        done: false,
+        date: new Date().toLocaleDateString(),
+        time:  new Date().toLocaleTimeString()
     }
     function pushTasks() {
         tasks.push(newTask);
@@ -280,17 +281,22 @@ function returnTasks(e) {
     updateLocalStorage();
     updateEmpty();
 }
-// function emptyTrash(e) {
-//     modalTrash.classList.add('modal-trash-active');
-//     overlay.classList.add('overlay-active');
-//     transition('-50%');
-//     disableScroll();
-//     clearBtn.addEventListener('click', () => {
-//         completedTasks = [];
-
-//         updateLocalStorage();
-//         updateEmpty()
-//     }, { once: true });
-// }
-
+function emptyTrash(e) {
+    modalTrash.classList.add('modal-trash-active');
+    overlay.classList.add('overlay-active');
+    transition('-50%');
+    disableScroll();
+    clearBtn.addEventListener('click', () => {
+        completedTasks = [];
+        document.querySelectorAll('.completed-tasks-list').forEach(item => {
+            item.remove();
+        })
+        updateLocalStorage();
+        updateEmpty();
+        closeModal();
+    }, { once: true });
+}
+function renderCommentsModal() {
+    
+}
 

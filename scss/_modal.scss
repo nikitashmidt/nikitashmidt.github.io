@@ -108,5 +108,11 @@
             @include visibleElem;
             top: 50%;
         }
+        @include mini-tablet{
+            width: 500px;
+        }
+        @include mobile {
+            width: 90%;
+        }
     }
 }

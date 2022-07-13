@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import './media';
+@import './loader';
 @import './completed-tasks';
 @import './mixins';
 @import './header';
@@ -7,7 +8,6 @@
 @import './overlay';
 @import './btn';
 @import './task';
-@import './loader';
 @import './checkbox';
 
 
@@ -19,15 +19,14 @@ body {
     background-color: #4b4c4e;
     padding-top: 30px;
 }
-// .body{
-//     &-hidden{
-//         padding-right: 5px;
-//         overflow: hidden;
-//         @include mini-desktop{
-//           padding-right: 0;
-//         }
-//     }
-// }
+.body{
+    &-hidden{
+        overflow: hidden;
+        @include mini-desktop{
+          padding-right: 0;
+        }
+    }
+}
 #element::-webkit-scrollbar {
   width: 6px;
   background-color: #005cbf;
@@ -43,8 +42,8 @@ body {
 .container{
   position: relative;
   padding-bottom: 50px;
-  transition:1s all;
-  // opacity: 0;
+  transition: 1s all;
+  opacity: 0;
   @include tablet{
     max-width: 95%;
   }
