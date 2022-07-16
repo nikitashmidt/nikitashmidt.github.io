@@ -38,7 +38,7 @@ let tasks = [],
 if (localStorage.getItem('tasks')) tasks = JSON.parse(localStorage.getItem('tasks'));
 if (localStorage.getItem('completedTasks')) completedTasks = JSON.parse(localStorage.getItem('completedTasks'));
 tasks.forEach(task => renderTask(task));
-completedTasks.forEach(task=> renderCompletedTask(task))
+completedTasks.forEach(task => renderCompletedTask(task));
 updateEmpty();
 
 
@@ -53,7 +53,6 @@ removeDoneTasksBtn.addEventListener('click', removeDoneTasks);
 completedTasksBlock.addEventListener('click', completedTasksUp);
 emptyTrashBtn.addEventListener('click', emptyTrash);
 completedTasksLists.addEventListener('click', returnTasks);
-// modalCommentsAdd.addEventListener('click', getValue);
 window.document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay.classList.contains('overlay-active')) closeModal();
 })
@@ -67,7 +66,6 @@ window.document.addEventListener('keydown', (e) => {
 //         }, 400)
 //     }, 1000)
 // }
-
 setInterval(() => {
     let now = new Date();
     headerTime.innerHTML = `${now.toLocaleDateString()} ${now.toLocaleTimeString()} `;
@@ -81,13 +79,7 @@ function addTask(e) {
         done: false,
         date: new Date().toLocaleDateString(),
         time: new Date().toLocaleTimeString(),
-        comments: [
-            {
-                id: Date.now(),
-                text: '',
-                done: false,
-            }
-        ]
+        comments: []
     }
     function pushTasks() {
         tasks.push(newTask);
@@ -317,28 +309,40 @@ function openModalComments(e) {
     let id = +e.target.parentNode.id;
     let eventTarget = e.target;
     const newTasks = tasks.find(item => item.id === id);
-    // console.log(id) // получаем только один id
     document.querySelector('.modal-comments__title').value = `${e.target.textContent.trim()}`;
     document.querySelector('.modal-comments__date').textContent = `${newTasks.date}`;
     document.querySelector('.modal-comments__time').textContent = `${newTasks.time}`;
     setTimeout(() => {
         modalCommentsInput.focus()
     }, 200);
-  
-    modalCommentsAdd.addEventListener('click', (e) => {
+    modalCommentsAdd.onclick = function (e) {
         e.preventDefault();
         if (modalCommentsInput.value.length === 0) {
             modalCommentsInput.focus()
             return;
-        } else {
-            modalCommentsInput.style.outline = '';
-            let newItem = `<li class="modal-comments__item">${modalCommentsInput.value}</li>`;
+        } 
+        modalCommentsInput.style.outline = '';
+        let findIndexTasks = tasks.findIndex(item => item.id === id);
+        console.log(findIndexTasks)
+        console.log(tasks[findIndexTasks].id)
+        if (tasks.id === id) {
+            let newComments = {
+                id: Date.now(),
+                text: modalCommentsInput.value,
+                done: false
+            }
+            let findIndexTasks = tasks.findIndex(item => item.id === id);
+            tasks[findIndexTasks].comments.push(newComments)
+            let newItem = `<li id="${tasks[index].comments.id}" class="modal-comments__item">${tasks[index].comments.text}</li>`;
             modalCommentsItems.insertAdjacentHTML('beforeend', newItem);
-            modalCommentsInput.value = '';
-            modalCommentsAdd.style.background = '#fff';
-            modalCommentsInput.focus()
+            console.log(newItem)
         }
-    });
+        modalCommentsInput.value = '';
+        modalCommentsAdd.style.background = '#fff';
+        modalCommentsInput.focus();
+        updateLocalStorage();
+    }
+    // renderComments(id);
     disableScroll();
     transition('-50%');
     trackingAddInput();
@@ -361,7 +365,21 @@ function trackingEditTitle(id, eventTarget) {
                 eventTarget.textContent = `${e.target.value}`;
             }
         })
-        updateEmpty();
         updateLocalStorage();
     }
 }
+// function renderComments(id) {
+//     document.querySelectorAll('.modal-comments__item').forEach(item=> item.remove())
+//     tasks.map((item, index) => {
+//         if (item.id === id) {
+//             console.log(item.comments)
+//             const name = tasks.findIndex(item => item.id === id);
+//             console.log(tasks.findIndex(item => item.id === id))
+//             let newItem = `<li id="${tasks.comments[name].id}" class="modal-comments__item">${tasks.comments[name].text}</li>`;
+//             console.log(tasks[name].comments)
+//             modalCommentsItems.insertAdjacentHTML('beforeend', newItem);
+//         }
+    
+//     })
+//     updateLocalStorage();
+// }

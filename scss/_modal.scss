@@ -187,6 +187,8 @@
         }
         &__bottom{
             width: 100%;
+            position: relative;
+            bottom: -10px;
         }
         &__form{
             @include flex-v-center;

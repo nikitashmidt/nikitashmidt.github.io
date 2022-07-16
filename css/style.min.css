@@ -626,6 +626,8 @@
 
 .modal-comments__bottom {
   width: 100%;
+  position: relative;
+  bottom: -10px;
 }
 
 .modal-comments__form {
