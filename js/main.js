@@ -17,6 +17,10 @@ const form = document.getElementById('form'),
     modalDone = document.querySelector('.modal-done'),
     modalDoneSpan = modalDone.querySelector('.modal-done-span'),
     modalComments = document.querySelector('.modal-comments'),
+    modalCommentsAdd = document.querySelector('.modal-comments__add'),
+    modalCommentsItems = document.querySelector('.modal-comments__items'),
+    modalCommentsInput = document.querySelector('.modal-comments__input'),
+    modalCommentsTitle = document.querySelector('.modal-comments__title'),
     completedTasksBlock = document.querySelector('.completed-tasks-block'),
     completedTasksArrow = document.querySelector('.completed-tasks-arrow'),
     completedTasksLists = document.querySelector('.completed-tasks-lists'),
@@ -49,20 +53,20 @@ removeDoneTasksBtn.addEventListener('click', removeDoneTasks);
 completedTasksBlock.addEventListener('click', completedTasksUp);
 emptyTrashBtn.addEventListener('click', emptyTrash);
 completedTasksLists.addEventListener('click', returnTasks);
+// modalCommentsAdd.addEventListener('click', getValue);
 window.document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay.classList.contains('overlay-active')) closeModal();
 })
-
-window.onload = function () {
-    window.setTimeout(() => {
-        loader.classList.remove('loader-active');
-        container.classList.add('container-animation');
-        setTimeout(() => {
-            document.querySelector('.body').classList.remove('body-hidden');
-            loader.style.display = 'none';
-        }, 400)
-    }, 1000)
-}
+// window.onload = function () {
+//     window.setTimeout(() => {
+//         loader.classList.remove('loader-active');
+//         container.classList.add('container-animation');
+//         setTimeout(() => {
+//             document.querySelector('.body').classList.remove('body-hidden');
+//             loader.style.display = 'none';
+//         }, 400)
+//     }, 1000)
+// }
 
 setInterval(() => {
     let now = new Date();
@@ -76,7 +80,14 @@ function addTask(e) {
         text: taskInput.value,
         done: false,
         date: new Date().toLocaleDateString(),
-        time:  new Date().toLocaleTimeString()
+        time: new Date().toLocaleTimeString(),
+        comments: [
+            {
+                id: Date.now(),
+                text: '',
+                done: false,
+            }
+        ]
     }
     function pushTasks() {
         tasks.push(newTask);
@@ -186,7 +197,7 @@ function closeModal() {
     if (modalDelete.classList.contains('modal-delete-active')) modalDelete.classList.remove('modal-delete-active');
     if (modal.classList.contains('modal-task-active')) modal.classList.remove('modal-task-active');
     if (modalTrash.classList.contains('modal-trash-active')) modalTrash.classList.remove('modal-trash-active');
-    if (modalComments.classList.contains('modal-comments-active')) modalComments.classList.remove('modal-comments-active');
+    if (modalComments.classList.contains('modal-comments-active')) modalComments.classList.remove('modal-comments-active') 
     enableScroll();
     transition('10px');
 }
@@ -301,14 +312,56 @@ function emptyTrash(e) {
 }
 function openModalComments(e) {
     if (e.target.dataset.action !== "task-title") return;   
-    const id = +e.target.parentNode.id;
-    const newTasks = tasks.filter(item => item.id === id);
-    document.querySelector('.modal-comments__title').value = `${e.target.textContent.trim()}`;
-    document.querySelector('.modal-comments__date').textContent = `${newTasks[0].date}`;
-    document.querySelector('.modal-comments__time').textContent = `${newTasks[0].time}`;
-    modalComments.classList.add('modal-comments-active');
     overlay.classList.add('overlay-active');
-    disableScroll()
+    document.querySelector('.modal-comments').classList.add('modal-comments-active');
+    let id = +e.target.parentNode.id;
+    let eventTarget = e.target;
+    const newTasks = tasks.find(item => item.id === id);
+    // console.log(id) // получаем только один id
+    document.querySelector('.modal-comments__title').value = `${e.target.textContent.trim()}`;
+    document.querySelector('.modal-comments__date').textContent = `${newTasks.date}`;
+    document.querySelector('.modal-comments__time').textContent = `${newTasks.time}`;
+    setTimeout(() => {
+        modalCommentsInput.focus()
+    }, 200);
+  
+    modalCommentsAdd.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (modalCommentsInput.value.length === 0) {
+            modalCommentsInput.focus()
+            return;
+        } else {
+            modalCommentsInput.style.outline = '';
+            let newItem = `<li class="modal-comments__item">${modalCommentsInput.value}</li>`;
+            modalCommentsItems.insertAdjacentHTML('beforeend', newItem);
+            modalCommentsInput.value = '';
+            modalCommentsAdd.style.background = '#fff';
+            modalCommentsInput.focus()
+        }
+    });
+    disableScroll();
     transition('-50%');
+    trackingAddInput();
+    trackingEditTitle(id, eventTarget);
 }
-
+function trackingAddInput() {
+    modalCommentsInput.addEventListener('input', (e) => {
+        if (e.target.value.length >= 1) {
+            modalCommentsAdd.style.background = 'green';
+        } else if (e.target.value.length === 0) { 
+            modalCommentsAdd.style.background = '#fff';
+        }
+    })
+}
+function trackingEditTitle(id, eventTarget) {
+    modalCommentsTitle.onchange = function (e) {
+        tasks.map(item => {
+            if (item.id === id) {
+                item.text = `${e.target.value}`;
+                eventTarget.textContent = `${e.target.value}`;
+            }
+        })
+        updateEmpty();
+        updateLocalStorage();
+    }
+}

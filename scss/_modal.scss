@@ -8,7 +8,7 @@
             min-width: 90%;
         }
         @include mobile {
-            min-width: 90%;
+            min-width: 95%;
             top: 50%;
         }
         &-active{
@@ -136,6 +136,30 @@
         hr{
             background-color: #fff;
         }
+        &__items{
+            height: 300px;
+            overflow: auto;
+            padding-right: 10px;
+            &::-webkit-scrollbar {
+                width: 6px;
+                background-color: #005cbf;
+                @include tablet{
+                    width: 3px;
+                }
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 3px;
+                background-color: #005cbf;
+            }
+            &::-webkit-scrollbar-track {
+                border-radius: 3px;
+                background-color: #f9f9fd;
+            }
+        }
+        &__item{
+            text-align: left;
+            word-break: break-all;
+        }
         &-active{
             @include visibleElem;
             top: 50%;
@@ -150,25 +174,56 @@
             border: none;
             font-size: 21px;
             text-align: center;
+            transition: 0.3s all;
             @include tablet {
                 overflow: auto;
                 white-space: inherit;
                 text-overflow: inherit;
             }
+            &:focus, &:hover{
+                outline: none;
+                box-shadow: 1px 1px 7px 5px $main-color;
+            }
         }
         &__bottom{
-            position: absolute;
-            left: 0;
-            bottom: 10px;
             width: 100%;
+        }
+        &__form{
+            @include flex-v-center;
+            gap: 5px;
         }
         &__input{
             width: 95%;
             text-align: center;
             margin-bottom: 10px;
             height: 35px;
-            &:focus{
-                box-shadow: 1px 1px 1px 1px rgb(41, 29, 148);
+            border-radius: 0.25rem;
+            border: none;
+            transition: 0.3s all;
+            padding: 0 10px;
+            &:focus, &:hover{
+                outline: none;
+                box-shadow: 1px 1px 7px 5px $main-color;
+            }
+        }
+        &__add{
+            border: none;
+            background: #fff;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            transform: translateY(-5px);
+            transition: 0.3s all;
+            svg{
+                vertical-align: middle;
+                pointer-events: none;
+            }
+            &:hover{
+                background-color: #fff;
+                box-shadow: 1px 1px 7px 5px $main-color;
+            }
+            &:active{
+                transform: scale(0.95);
             }
         }
     }

@@ -47,12 +47,14 @@
         display: flex;
         justify-content: center;    
         align-items: center;
-        width: 100%;
         gap: 20px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 12;
         transition: 0.5s all;
+        @include mini-desktop{
+            width: 100%;
+        }
         @include mini-tablet{
             flex-direction: column;
             align-items: flex-end;
