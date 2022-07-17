@@ -7,7 +7,7 @@
         border-radius: 0.25rem;
         padding: 10px;
         width: 100%;
-        @include mobile {
+        @include tablet {
             padding: 5px;
             padding-right: 10px;
         }
@@ -34,6 +34,11 @@
         &__buttons{
             height: 40px;
             flex-shrink: 0;
+            transition: 0.3s all;   
+            @include tablet{
+                position: absolute; 
+                right: -105px;
+            }
         }
     }
 }
