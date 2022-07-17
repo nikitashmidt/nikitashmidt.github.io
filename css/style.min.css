@@ -585,6 +585,13 @@
   background-color: #f9f9fd;
 }
 
+@media (max-width: 1024px) {
+  .modal-comments__items::-webkit-scrollbar {
+    width: 0;
+    background: none;
+  }
+}
+
 .modal-comments__item {
   text-align: left;
   word-break: break-all;

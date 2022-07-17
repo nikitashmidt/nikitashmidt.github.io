@@ -323,26 +323,23 @@ function openModalComments(e) {
         } 
         modalCommentsInput.style.outline = '';
         let findIndexTasks = tasks.findIndex(item => item.id === id);
-        console.log(findIndexTasks)
-        console.log(tasks[findIndexTasks].id)
-        if (tasks.id === id) {
-            let newComments = {
-                id: Date.now(),
-                text: modalCommentsInput.value,
-                done: false
+        tasks.forEach((item, index) => {
+            if (item.id === id) {
+                let newComments = {
+                    id: Date.now(),
+                    text: document.querySelector('.modal-comments__input').value,
+                    done: false
+                }
+                tasks[findIndexTasks].comments.push(newComments); 
+                renderComments(id)
             }
-            let findIndexTasks = tasks.findIndex(item => item.id === id);
-            tasks[findIndexTasks].comments.push(newComments)
-            let newItem = `<li id="${tasks[index].comments.id}" class="modal-comments__item">${tasks[index].comments.text}</li>`;
-            modalCommentsItems.insertAdjacentHTML('beforeend', newItem);
-            console.log(newItem)
-        }
+        })
         modalCommentsInput.value = '';
         modalCommentsAdd.style.background = '#fff';
         modalCommentsInput.focus();
         updateLocalStorage();
     }
-    // renderComments(id);
+    renderComments(id);
     disableScroll();
     transition('-50%');
     trackingAddInput();
@@ -368,18 +365,15 @@ function trackingEditTitle(id, eventTarget) {
         updateLocalStorage();
     }
 }
-// function renderComments(id) {
-//     document.querySelectorAll('.modal-comments__item').forEach(item=> item.remove())
-//     tasks.map((item, index) => {
-//         if (item.id === id) {
-//             console.log(item.comments)
-//             const name = tasks.findIndex(item => item.id === id);
-//             console.log(tasks.findIndex(item => item.id === id))
-//             let newItem = `<li id="${tasks.comments[name].id}" class="modal-comments__item">${tasks.comments[name].text}</li>`;
-//             console.log(tasks[name].comments)
-//             modalCommentsItems.insertAdjacentHTML('beforeend', newItem);
-//         }
-    
-//     })
-//     updateLocalStorage();
-// }
+function renderComments(id) {
+    document.querySelectorAll('.modal-comments__item').forEach(item => item.remove());
+    tasks.forEach((item) => {
+        if (item.id === id) { 
+            item.comments.forEach((item, index) => {
+                let newItem = `<li id="${item.id}" class="modal-comments__item">${item.text}</li>`;
+                modalCommentsItems.insertAdjacentHTML('beforeend', newItem);
+            })
+        }
+    })
+    updateLocalStorage();
+}
