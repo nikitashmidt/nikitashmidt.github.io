@@ -377,3 +377,47 @@ function renderComments(id) {
     })
     updateLocalStorage();
 }
+
+
+
+// touch move
+modalComments.addEventListener('touchstart', handleTouchStart, false);
+modalComments.addEventListener('touchmove', handleTouchMove, false);
+let xDown = null;
+let yDown = null;
+function getTouches(evt) {
+  return evt.touches ||             // browser API
+         evt.originalEvent.touches; // jQuery
+}
+function handleTouchStart(evt) {
+    const firstTouch = getTouches(evt)[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+};
+function handleTouchMove(evt) {
+    if ( ! xDown || ! yDown ) return;
+    var xUp = evt.touches[0].clientX;
+    var yUp = evt.touches[0].clientY;
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff > 0 ) {
+            /* right swipe */
+            console.log('right')
+            closeModal()
+        } else {
+            /* left swipe */
+            console.log('left')
+        }
+    } else {
+        if ( yDiff > 0 ) {
+            /* down swipe */
+            console.log('down')
+        } else {
+            /* up swipe */
+            console.log('up')
+        }
+    }
+    xDown = null;
+    yDown = null;
+};

@@ -80,14 +80,16 @@
 		</div>
 		<div class="overlay"></div>
 		<div class="modal-comments">
-			<input maxlength="60" type="text" class="modal-comments__title" value=""></input>
+			<div class="modal-comments__block">
+				<input maxlength="60" type="text" class="modal-comments__title" value=""></input>
+			</div>
 			<hr>
 			<div>
 				<ul class="modal-comments__items"></ul>
 			</div>
 			<div class="modal-comments__bottom">
 				<form class="modal-comments__form" action="#">
-					<input  maxlength="60" placeholder="Добавьте комментарий" type="text" class="modal-comments__input" required>
+						<input  maxlength="60" placeholder="Добавьте комментарий" type="text" class="modal-comments__input" required>
 					<button data-action="comments-add" type="submit" class="modal-comments__add"> 
 						<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 							viewBox="0 0 42 42" style="enable-background:new 0 0 42 42;" xml:space="preserve">
