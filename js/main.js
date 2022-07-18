@@ -386,8 +386,8 @@ modalComments.addEventListener('touchmove', handleTouchMove, false);
 let xDown = null;
 let yDown = null;
 function getTouches(evt) {
-  return evt.touches ||             // browser API
-         evt.originalEvent.touches; // jQuery
+  return evt.touches ||
+         evt.originalEvent.touches;
 }
 function handleTouchStart(evt) {
     const firstTouch = getTouches(evt)[0];
@@ -400,22 +400,10 @@ function handleTouchMove(evt) {
     var yUp = evt.touches[0].clientY;
     var xDiff = xDown - xUp;
     var yDiff = yDown - yUp;
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-        if ( xDiff > 0 ) {
-            /* right swipe */
-            console.log('right')
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff >= 10) {
+            console.log(xDiff)
             closeModal()
-        } else {
-            /* left swipe */
-            console.log('left')
-        }
-    } else {
-        if ( yDiff > 0 ) {
-            /* down swipe */
-            console.log('down')
-        } else {
-            /* up swipe */
-            console.log('up')
         }
     }
     xDown = null;
