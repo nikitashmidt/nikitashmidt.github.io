@@ -315,6 +315,7 @@ function openModalComments(e) {
     setTimeout(() => {
         modalCommentsInput.focus()
     }, 200);
+    e.preventDefault();
     modalCommentsAdd.onclick = function (e) {
         e.preventDefault();
         if (modalCommentsInput.value.length === 0) {
@@ -378,8 +379,6 @@ function renderComments(id) {
     updateLocalStorage();
 }
 
-
-
 modalComments.addEventListener('touchstart', handleTouchStart, false);
 modalComments.addEventListener('touchmove', handleTouchMove, false);
 let xDown = null;
@@ -407,11 +406,10 @@ function handleTouchMove(evt) {
     xDown = null;
     yDown = null;
 };
-if (window.screen.width <= 992) {
-    modalCommentsItems.style.height = `${window.screen.height - 171}px`
-}
-window.addEventListener('resize', (e) => {
+if (window.screen.width <= 992)  modalCommentsItems.style.height = `${window.screen.height - 171}px`;
+
+window.addEventListener('resize', () => {
     if (window.screen.width <= 992) {
-        modalCommentsItems.style.height = `${window.screen.height - 171}px`
+        modalCommentsItems.style.height = `${window.screen.height - 171}px`;
      }
 })
