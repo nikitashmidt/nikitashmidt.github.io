@@ -380,7 +380,6 @@ function renderComments(id) {
 
 
 
-// touch move
 modalComments.addEventListener('touchstart', handleTouchStart, false);
 modalComments.addEventListener('touchmove', handleTouchMove, false);
 let xDown = null;
@@ -402,10 +401,17 @@ function handleTouchMove(evt) {
     var yDiff = yDown - yUp;
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
         if (xDiff >= 10) {
-            console.log(xDiff)
             closeModal()
         }
     }
     xDown = null;
     yDown = null;
 };
+if (window.screen.width <= 992) {
+    modalCommentsItems.style.height = `${window.screen.height - 171}px`
+}
+window.addEventListener('resize', (e) => {
+    if (window.screen.width <= 992) {
+        modalCommentsItems.style.height = `${window.screen.height - 171}px`
+     }
+})
