@@ -315,7 +315,6 @@ function openModalComments(e) {
     setTimeout(() => {
         modalCommentsInput.focus()
     }, 200);
-    e.preventDefault();
     modalCommentsAdd.onclick = function (e) {
         e.preventDefault();
         if (modalCommentsInput.value.length === 0) {
@@ -407,7 +406,6 @@ function handleTouchMove(evt) {
     yDown = null;
 };
 if (window.screen.width <= 992)  modalCommentsItems.style.height = `${window.screen.height - 171}px`;
-
 window.addEventListener('resize', () => {
     if (window.screen.width <= 992) {
         modalCommentsItems.style.height = `${window.screen.height - 171}px`;
