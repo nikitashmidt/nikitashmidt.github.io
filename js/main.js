@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     trackingEditTitle(id, eventTarget);
   }
   function submitForm(id) {
-    document.querySelector('.modal-comments__form').addEventListener('submit', (e) => {
+    modalCommentsAdd.addEventListener('click', (e) => {
       e.preventDefault();
       if (modalCommentsInput.value.length === 0) {
         modalCommentsInput.focus();
@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (item.id === id) {
           let newComments = {
             id: Date.now(),
-            text: document.querySelector(".modal-comments__input").value,
+            text: modalCommentsInput.value,
             done: false,
           };
           tasks[findIndexTasks].comments.push(newComments);
@@ -355,6 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       modalCommentsAdd.style.background = "#fff";
       modalCommentsInput.focus();
+      modalCommentsInput.value = '';
       updateLocalStorage();
     })
   }
