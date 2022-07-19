@@ -326,7 +326,15 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       modalCommentsInput.focus();
     }, 200);
-    modalCommentsAdd.onclick = function (e) {
+    renderComments(id);
+    submitForm(id);
+    disableScroll();
+    transition("-50%");
+    trackingAddInput();
+    trackingEditTitle(id, eventTarget);
+  }
+  function submitForm(id) {
+    document.querySelector('.modal-comments__form').addEventListener('submit', (e) => {
       e.preventDefault();
       if (modalCommentsInput.value.length === 0) {
         modalCommentsInput.focus();
@@ -334,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       modalCommentsInput.style.outline = "";
       let findIndexTasks = tasks.findIndex((item) => item.id === id);
-      tasks.forEach((item, index) => {
+      tasks.forEach((item) => {
         if (item.id === id) {
           let newComments = {
             id: Date.now(),
@@ -345,16 +353,10 @@ document.addEventListener("DOMContentLoaded", () => {
           renderComments(id);
         }
       });
-      modalCommentsInput.value = "";
       modalCommentsAdd.style.background = "#fff";
       modalCommentsInput.focus();
       updateLocalStorage();
-    };
-    renderComments(id);
-    disableScroll();
-    transition("-50%");
-    trackingAddInput();
-    trackingEditTitle(id, eventTarget);
+    })
   }
   function trackingAddInput() {
     modalCommentsInput.addEventListener("input", (e) => {
