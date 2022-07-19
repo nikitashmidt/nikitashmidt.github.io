@@ -586,43 +586,28 @@
 }
 
 .modal-comments__items {
-  height: 300px;
-  overflow: auto;
-  padding-right: 10px;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 70px;
+  width: 100%;
 }
 
 .modal-comments__items::-webkit-scrollbar {
-  width: 6px;
-  background-color: #005cbf;
-}
-
-@media (max-width: 992px) {
-  .modal-comments__items::-webkit-scrollbar {
-    width: 3px;
-  }
-}
-
-.modal-comments__items::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: #005cbf;
-}
-
-.modal-comments__items::-webkit-scrollbar-track {
-  border-radius: 3px;
-  background-color: #f9f9fd;
-}
-
-@media (max-width: 1024px) {
-  .modal-comments__items::-webkit-scrollbar {
-    width: 0;
-    background: none;
-  }
+  width: 0;
+  background: none;
 }
 
 .modal-comments__item {
   text-align: left;
   word-break: break-all;
   padding: 5px;
+}
+
+.modal-comments__item:last-child {
+  margin-bottom: 110px;
 }
 
 .modal-comments__title {
@@ -657,7 +642,7 @@
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  width: 95%;
+  width: 99%;
   position: absolute;
   bottom: 0px;
   background-color: #555252;
@@ -675,6 +660,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 5px;
+  padding: 0 10px;
 }
 
 .modal-comments__input {

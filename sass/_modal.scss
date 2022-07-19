@@ -153,35 +153,25 @@
             background-color: #fff;
         }
         &__items{
-            height: 300px;
-            overflow: auto;
-            padding-right: 10px;
+            bottom: 0;
+            left: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: fixed;
+            top: 70px;
+            width: 100%;
             &::-webkit-scrollbar {
-                width: 6px;
-                background-color: #005cbf;
-                @include tablet{
-                    width: 3px;
-                }
-            }
-            &::-webkit-scrollbar-thumb {
-                border-radius: 3px;
-                background-color: #005cbf;
-            }
-            &::-webkit-scrollbar-track {
-                border-radius: 3px;
-                background-color: #f9f9fd;
-            }
-            @include mini-desktop{
-                &::-webkit-scrollbar{
-                    width: 0;
-                    background: none;
-                }
+                width: 0;
+                background: none;
             }
         }
         &__item{
             text-align: left;
             word-break: break-all;
             padding: 5px;
+            &:last-child{
+                margin-bottom: 110px;
+            }
         }
         &__title{
             width: 100%;
@@ -207,7 +197,7 @@
         &__bottom{
             left: 50%;
             transform: translateX(-50%);
-            width: 95%;
+            width: 99%;
             position: absolute;
             bottom: 0px;
             background-color: $bg-color;
@@ -216,6 +206,7 @@
         &__form{
             @include flex-v-center;
             gap: 5px;
+            padding: 0 10px;
         }
         &__input{
             width: 100%;

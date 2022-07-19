@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modalCommentsItems = document.querySelector(".modal-comments__items"),
     modalCommentsInput = document.querySelector(".modal-comments__input"),
     modalCommentsTitle = document.querySelector(".modal-comments__title"),
+    modalCommentsContent = document.querySelector('.modal-comments__content'),
     completedTasksBlock = document.querySelector(".completed-tasks-block"),
     completedTasksArrow = document.querySelector(".completed-tasks-arrow"),
     completedTasksLists = document.querySelector(".completed-tasks-lists"),
@@ -392,8 +393,8 @@ document.addEventListener("DOMContentLoaded", () => {
     updateLocalStorage();
   }
 
-  modalComments.addEventListener("touchstart", handleTouchStart, false);
-  modalComments.addEventListener("touchmove", handleTouchMove, false);
+  modalCommentsContent.addEventListener("touchstart", handleTouchStart, false);
+  modalCommentsContent.addEventListener("touchmove", handleTouchMove, false);
   let xDown = null;
   let yDown = null;
   function getTouches(evt) {
