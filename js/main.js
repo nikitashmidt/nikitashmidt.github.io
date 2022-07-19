@@ -380,10 +380,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".modal-comments__item").forEach((item) => item.remove());
     tasks.forEach((item) => {
       if (item.id === id) {
-        item.comments.forEach((item, index) => {
-          let newItem = `<li id="${item.id}" class="modal-comments__item">${item.text}</li>`;
-          modalCommentsItems.insertAdjacentHTML("beforeend", newItem);
-        });
+        if (item.comments.length === 0) {
+          return;
+        } else {
+          item.comments.forEach((item, index) => {
+            let newItem = `<li id="${item.id}" class="modal-comments__item">${item.text}</li>`;
+            modalCommentsItems.insertAdjacentHTML("beforeend", newItem);
+          });
+        }
       }
     });
     updateLocalStorage();
