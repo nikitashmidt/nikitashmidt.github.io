@@ -204,7 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
       modalComments.classList.remove("modal-comments-active");
     enableScroll();
     transition("10px");
-    console.log('close modal');
   }
   function removeDoneTasks(e) {
     let newCompletedTasks = tasks.filter((task) => task.done);
@@ -378,9 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
   function renderComments(id) {
-    document
-      .querySelectorAll(".modal-comments__item")
-      .forEach((item) => item.remove());
+    document.querySelectorAll(".modal-comments__item").forEach((item) => item.remove());
     tasks.forEach((item) => {
       if (item.id === id) {
         item.comments.forEach((item, index) => {
@@ -424,14 +421,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-document.querySelectorAll('#tasksList li').forEach(item => {
-  item.addEventListener('click', (e) => {
-    console.log(e)
-  })
-})
+
   
-document.querySelectorAll('').forEach(item => {
-  item.addEventListener('click', (e) => {
-    console.log(e)
-  })
-})
