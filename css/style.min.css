@@ -533,7 +533,7 @@
   visibility: hidden;
   background-color: #555252;
   width: 55%;
-  min-height: 500px;
+  height: 550px;
   z-index: 20;
   position: fixed;
   top: 0%;
@@ -591,8 +591,9 @@
   overflow-x: hidden;
   overflow-y: auto;
   position: fixed;
-  top: 70px;
+  top: 80px;
   width: 100%;
+  padding: 0 10px;
 }
 
 .modal-comments__items::-webkit-scrollbar {
@@ -603,11 +604,45 @@
 .modal-comments__item {
   text-align: left;
   word-break: break-all;
-  padding: 5px;
+  padding: 10px;
+  list-style: none;
+  border: 1px solid #fff;
+  margin-bottom: 10px;
+  border-radius: 0.25rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.modal-comments__item::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .modal-comments__item:last-child {
   margin-bottom: 100px;
+}
+
+.modal-comments__svg {
+  position: absolute;
+  left: 14px;
+  opacity: 0;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+  top: 9px;
+}
+
+.modal-comments__svg:hover {
+  opacity: 1;
 }
 
 .modal-comments__title {
