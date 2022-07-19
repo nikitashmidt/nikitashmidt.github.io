@@ -117,7 +117,7 @@
     }
     &-comments{
         @include hiddenElem;
-        background-color: rgb(85, 82, 82);
+        background-color: $bg-color;
         width: 55%;
         min-height: 400px;
         z-index: 20;
@@ -185,7 +185,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            background-color: #555252;
+            background-color: $bg-color;
             color: white;
             border: none;
             font-size: 21px;
@@ -205,8 +205,8 @@
             width: 100%;
             position: relative;
             bottom: -10px;
+            background-color: $bg-color;
             @include tablet{
-                width: 97%;
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%);
@@ -216,11 +216,14 @@
         &__form{
             @include flex-v-center;
             gap: 5px;
+            @include tablet{
+                padding: 0 15px;
+            }
         }
         &__input{
             width: 95%;
             text-align: center;
-            margin-bottom: 10px;
+            margin: 10px 0;
             height: 35px;
             border-radius: 0.25rem;
             border: none;
