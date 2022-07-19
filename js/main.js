@@ -418,14 +418,6 @@ document.addEventListener("DOMContentLoaded", () => {
     xDown = null;
     yDown = null;
   }
-  window.addEventListener("resize", () => {
-    if (window.screen.width <= 992) {
-      modalCommentsItems.style.height = `${window.screen.height - 171}px`;
-    }
-  });
-  if (window.screen.width <= 992) {
-    modalCommentsItems.style.height = `${window.screen.height - 171}px`;
-  }
 });
 
   

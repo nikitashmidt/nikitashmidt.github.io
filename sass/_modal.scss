@@ -119,7 +119,7 @@
         @include hiddenElem;
         background-color: $bg-color;
         width: 55%;
-        min-height: 400px;
+        min-height: 500px;
         z-index: 20;
         position: fixed;
         top: 0%;
@@ -130,6 +130,9 @@
         color: white;
         border-radius: 0.25rem;
         text-align: center;
+        @include desktop{
+            width: 75%;
+        }
         @include mini-desktop{
             width: 80%;
         }
@@ -202,26 +205,20 @@
             }
         }
         &__bottom{
-            width: 100%;
-            position: relative;
-            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            position: absolute;
+            bottom: 0px;
             background-color: $bg-color;
-            @include tablet{
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                bottom: 5px;
-            }
+            padding: 15px 0;
         }
         &__form{
             @include flex-v-center;
             gap: 5px;
-            @include tablet{
-                padding: 0 15px;
-            }
         }
         &__input{
-            width: 95%;
+            width: 100%;
             text-align: center;
             margin: 10px 0;
             height: 35px;
@@ -240,7 +237,6 @@
             cursor: pointer;
             width: 35px;
             height: 35px;
-            transform: translateY(-5px);
             transition: 0.3s all;
             svg{
                 vertical-align: middle;
