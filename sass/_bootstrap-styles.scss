@@ -1,0 +1,26 @@
+.mb-4,.my-4{margin-bottom:1.5rem!important}
+.mb-2 {margin-bottom: 0.5rem !important}
+.display-4{font-size: 3.5rem; font-weight: 300; line-height: 1.2;}
+.h4{font-size: 1.5rem;}
+.h5{font-size: 1.25rem;}
+.container { width: 100%;padding-right: 15px; padding-left: 15px;margin-right: auto; margin-left: auto;}
+@media (min-width: 576px) {.container { max-width: 540px;}}
+@media (min-width: 768px) {.container {max-width: 720px;}}
+@media (min-width: 992px) {.container { max-width: 960px;}}
+@media (min-width: 1200px) {.container {max-width: 1140px;}}
+.card-header {padding: 0.75rem 1.25rem;margin-bottom: 0;background-color: rgba(0, 0, 0, 0.03);border-bottom: 1px solid rgba(0, 0, 0, 0.125);}
+.card-body {-webkit-box-flex: 1;-ms-flex: 1 1 auto;flex: 1 1 auto;padding: 1.25rem;}
+.form-group { margin-bottom: 1rem;}
+.form-control {display: block;width: 100%;padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;color: #495057;background-color: #fff;background-clip: padding-box; border: 1px solid #ced4da;border-radius: 0.25rem;transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;}
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+}
+.text-muted {
+    color: #6c757d !important;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}

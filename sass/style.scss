@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+// @import './bootstrap-styles';
 @import './variables';
 @import './media';
 @import './loader';
@@ -19,6 +20,7 @@ html, body {
 body {
     background-color: #4b4c4e;
     padding-top: 30px;
+    margin: 0;
 }
 .body{
     &-hidden{
@@ -62,7 +64,7 @@ body {
   height: 400px;
 }
 .d-flex {
-  display: flex;
+  display: flex !important;
 }
 .gray {
   color: #BDBDBD;
@@ -139,6 +141,11 @@ body {
     transition: 0.5s all;
     border-radius: 0.25rem !important;
     margin-bottom: 5px;
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 5px;
+    background-color: #fff;
     &-delete{
         transform: translateY(-1000px);
     }

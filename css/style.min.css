@@ -656,7 +656,7 @@
 @media (max-width: 992px) {
   .modal-comments__bottom {
     width: 97%;
-    position: fixed;
+    position: absolute;
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -978,6 +978,7 @@ html, body {
 body {
   background-color: #4b4c4e;
   padding-top: 30px;
+  margin: 0;
 }
 
 .body-hidden {
@@ -1037,9 +1038,9 @@ body {
 }
 
 .d-flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .gray {
@@ -1157,6 +1158,11 @@ body {
   transition: 0.5s all;
   border-radius: 0.25rem !important;
   margin-bottom: 5px;
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 5px;
+  background-color: #fff;
 }
 
 .list-group-item-delete {
