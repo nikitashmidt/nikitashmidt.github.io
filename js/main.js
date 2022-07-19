@@ -179,9 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         item.innerHTML = `Вернуть задачу`;
       });
     }
-    if (window.screen.width <= 992) {
-      modalCommentsItems.style.height = `${window.screen.height - 171}px`;
-    }
+   
   }
   function openModal() {
     checkbox.checked = false;
@@ -425,6 +423,9 @@ document.addEventListener("DOMContentLoaded", () => {
       modalCommentsItems.style.height = `${window.screen.height - 171}px`;
     }
   });
+  if (window.screen.width <= 992) {
+    modalCommentsItems.style.height = `${window.screen.height - 171}px`;
+  }
 });
 
   
