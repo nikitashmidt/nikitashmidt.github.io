@@ -180,7 +180,7 @@
             &:last-child{
                 margin-bottom: 100px;
             }
-            input{
+            textarea{
                 flex: 1;
                 cursor: text;
                 background: none;
@@ -188,7 +188,9 @@
                 color: #fff;
                 padding: 5px;
                 flex: 1;
-                white-space: pre-wrap;
+                width: 100%;
+                resize: none;
+                max-height: 35px;
                 &:focus{
                     outline: 1px solid #fff;
                     border-radius: 0.25rem;

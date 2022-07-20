@@ -622,7 +622,7 @@
   margin-bottom: 100px;
 }
 
-.modal-comments__item input {
+.modal-comments__item textarea {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -632,10 +632,12 @@
   color: #fff;
   padding: 5px;
   flex: 1;
-  white-space: pre-wrap;
+  width: 100%;
+  resize: none;
+  max-height: 35px;
 }
 
-.modal-comments__item input:focus {
+.modal-comments__item textarea:focus {
   outline: 1px solid #fff;
   border-radius: 0.25rem;
 }
@@ -1206,6 +1208,7 @@ body {
   padding: 0.75rem 1.25rem;
   margin-bottom: 5px;
   background-color: #fff;
+  resize: none;
 }
 
 .list-group-item-delete {
