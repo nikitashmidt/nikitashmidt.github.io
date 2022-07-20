@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     trackingEditTitle(id, eventTarget);
   }
   function submitForm(id) {
-    modalCommentsAdd.addEventListener('click', (e) => {
+    modalCommentsAdd.onclick = function (e) {
       e.preventDefault();
       if (modalCommentsInput.value.length === 0) {
         modalCommentsInput.focus();
@@ -357,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modalCommentsInput.focus();
       modalCommentsInput.value = '';
       updateLocalStorage();
-    })
+    }
   }
   function trackingAddInput() {
     modalCommentsInput.addEventListener("input", (e) => {
@@ -386,15 +386,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (item.comments.length === 0) {
           return;
         } else {
-          item.comments.forEach((item, index) => {
+          item.comments.forEach((item) => {
             let newItem = `
             <li id="${item.id}" class="modal-comments__item">
-              <div class="modal-comments__svg">
+              <div class="modal-comments__svg" data-action="modal-comments-svg">
                 <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              ${item.text}
+              <input size="18" maxlength="60" type="text" value='${item.text}'> </input>
             </li>
             `;
             modalCommentsItems.insertAdjacentHTML("beforeend", newItem);

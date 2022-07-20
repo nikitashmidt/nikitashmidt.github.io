@@ -618,31 +618,55 @@
   position: relative;
 }
 
-.modal-comments__item::before {
-  content: '';
-  display: inline-block;
-  width: 18px;
-  height: 18px;
+.modal-comments__item:last-child {
+  margin-bottom: 100px;
+}
+
+.modal-comments__item input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  cursor: text;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 5px;
+  flex: 1;
+  white-space: pre-wrap;
+}
+
+.modal-comments__item input:focus {
+  outline: 1px solid #fff;
+  border-radius: 0.25rem;
+}
+
+.modal-comments__svg {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
   border: 1px solid #fff;
   border-radius: 50%;
   margin-right: 10px;
 }
 
-.modal-comments__item:last-child {
-  margin-bottom: 100px;
+.modal-comments__svg:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
-.modal-comments__svg {
-  position: absolute;
-  left: 14px;
-  opacity: 0;
-  -webkit-transition: 0.3s all;
-  transition: 0.3s all;
-  top: 9px;
-}
-
-.modal-comments__svg:hover {
+.modal-comments__svg:hover svg {
   opacity: 1;
+}
+
+.modal-comments__svg-active {
+  opacity: 1;
+}
+
+.modal-comments__svg svg {
+  pointer-events: none;
+  -webkit-transform: translate(4px, -4px);
+          transform: translate(4px, -4px);
+  opacity: 0;
 }
 
 .modal-comments__title {
