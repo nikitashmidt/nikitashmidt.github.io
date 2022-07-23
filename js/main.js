@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const addBtnTasks = document.querySelector(".button-add-tasks"),
+  const form = document.getElementById("form"),
     taskInput = document.getElementById("taskInput"),
     tasksList = document.getElementById("tasksList"),
     btns = document.querySelector(".btns"),
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     checkbox = document.getElementById("checkbox"),
     headerNumberTasks = document.querySelector(".header__number-tasks span"),
     clearBtn = document.querySelector('[data-action="clear"]');
+  
   let tasks = [],
     completedTasks = [];
   if (localStorage.getItem("tasks"))
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   completedTasks.forEach((task) => renderCompletedTask(task));
   updateEmpty();
 
-  addBtnTasks.addEventListener("click", addTask);
+  form.addEventListener("submit", addTask);
   tasksList.addEventListener("click", deleteTask);
   tasksList.addEventListener("click", doneTask);
   tasksList.addEventListener("click", openModalComments);
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   completedTasksBlock.addEventListener("click", completedTasksUp);
   emptyTrashBtn.addEventListener("click", emptyTrash);
   completedTasksLists.addEventListener("click", returnTasks);
+  modalComments.addEventListener('click', editDoneComments);
   window.document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && overlay.classList.contains("overlay-active"))
       closeModal();
@@ -330,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
     trackingAddInput();
     trackingEditTitle(id, eventTarget);
     doneComments(id);
+    editComments(id);
   }
   function submitForm(id) {
     modalCommentsAdd.onclick = function (e) {
@@ -387,6 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
           item.comments.forEach((item) => {
             const cssClass = item.done ? "modal-comments__comment  comments-done" : 'modal-comments__comment';
             const ccsClassSvg = item.done ? 'modal-comments__svg modal-comments__svg-active' : 'modal-comments__svg';
+            const modalEditClass = item.done ? 'modal-comments__edit pe' : 'modal-comments__edit';
             let newItem = `
             <li id="${item.id}" class="modal-comments__item">
               <div class="${ccsClassSvg}" data-action="modal-comments-svg" data-action="modal-comments-svg">
@@ -394,12 +398,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 <path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="red" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <input type="text" class="${cssClass}" value="${item.text}"></input>
+              <input maxlength="60" value="${item.text}" class="${cssClass}" disabled="true"></input>
               <div class="modal-comments__btns">
-                <button data-action="modal-edit" class="modal-comments__edit">
+                <button data-action="modal-comments-edit" class="${modalEditClass}">
                   <svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16.4745 5.40801L18.5917 7.52524M17.8358 3.54289L12.1086 9.27005C11.8131 9.56562 11.6116 9.94206 11.5296 10.3519L11 13L13.6481 12.4704C14.0579 12.3884 14.4344 12.1869 14.7299 11.8914L20.4571 6.16423C21.181 5.44037 21.181 4.26676 20.4571 3.5429C19.7332 2.81904 18.5596 2.81903 17.8358 3.54289Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M19 15V18C19 19.1046 18.1046 20 17 20H6C4.89543 20 4 19.1046 4 18V7C4 5.89543 4.89543 5 6 5H9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.4745 5.40801L18.5917 7.52524M17.8358 3.54289L12.1086 9.27005C11.8131 9.56562 11.6116 9.94206 11.5296 10.3519L11 13L13.6481 12.4704C14.0579 12.3884 14.4344 12.1869 14.7299 11.8914L20.4571 6.16423C21.181 5.44037 21.181 4.26676 20.4571 3.5429C19.7332 2.81904 18.5596 2.81903 17.8358 3.54289Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19 15V18C19 19.1046 18.1046 20 17 20H6C4.89543 20 4 19.1046 4 18V7C4 5.89543 4.89543 5 6 5H9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button data-action="modal-comments-redact" class="modal-comments__redact none" >
+                  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="none" fill-rule="evenodd" d="M4,4 L9,4 C9.55228,4 10,3.55228 10,3 C10,2.44772 9.55228,2 9,2 L4,2 C2.89543,2 2,2.89543 2,4 L2,12 C2,13.1046 2.89543,14 4,14 L12,14 C13.1046,14 14,13.1046 14,12 L14,10 C14,9.44771 13.5523,9 13,9 C12.4477,9 12,9.44771 12,10 L12,12 L4,12 L4,4 Z M15.2071,2.29289 C14.8166,1.90237 14.1834,1.90237 13.7929,2.29289 L8.5,7.58579 L7.70711,6.79289 C7.31658,6.40237 6.68342,6.40237 6.29289,6.79289 C5.90237,7.18342 5.90237,7.81658 6.29289,8.20711 L7.79289,9.70711 C7.98043,9.89464 8.23478,10 8.5,10 C8.76522,10 9.01957,9.89464 9.20711,9.70711 L15.2071,3.70711 C15.5976,3.31658 15.5976,2.68342 15.2071,2.29289 Z"/>
                   </svg>
                 </button>
               </div>
@@ -454,7 +463,31 @@ document.addEventListener("DOMContentLoaded", () => {
           })
         }
       })
+      parentNode.children[2].children[0].classList.toggle('pe');
       updateLocalStorage();
     }
+  }
+  function editComments(id) {
+    modalComments.addEventListener('click', (e) => {
+      if (e.target.dataset.action !== 'modal-comments-edit') return;
+      document.querySelectorAll('.modal-comments__comment').forEach(item => item.disabled = true);
+      document.querySelectorAll('.modal-comments__edit').forEach(item => item.classList.remove('none'));
+      document.querySelectorAll('.modal-comments__redact').forEach(item => item.classList.add('none'));
+      const parentNode = e.target.parentNode.parentNode.children[1];
+      const parentNodeChildren = e.target.parentNode.children[1];
+      const eTarget = e.target;
+      eTarget.classList.add('none');
+      parentNodeChildren.classList.remove('none');
+      parentNode.disabled = false;
+      parentNode.focus();
+      parentNode.setSelectionRange(parentNode.value.length, parentNode.value.length);
+    })
+  }
+  function editDoneComments(e) {
+    if (e.target.dataset.action !== 'modal-comments-redact') return;
+    e.target.classList.add('none');
+    e.target.parentNode.children[0].classList.remove('none');
+    e.target.parentNode.parentNode.children[1].disabled = true;
+    console.log(e.target.parentNode.parentNode.children[1])
   }
 });

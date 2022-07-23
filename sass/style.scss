@@ -128,11 +128,19 @@ body {
       transform: scale(0.9);
     }
 }
+.pe{
+  pointer-events: none;
+  svg{
+    path{
+        stroke: red;
+    }
+}
+}
 .btn-action img {
   pointer-events: none;
 }
 .none {
-  display: none !important;
+  display: none ;
 }
 .float-right {
   float: right;
