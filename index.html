@@ -26,16 +26,14 @@
 		<div class="card bg-light modal-task" >
 			<div class="card-header">Добавить новую задачу</div>
 			<div class="card-body">
-				<form id="form">
-					<div class="form-group">
-						<input maxlength="60" type="text" class="form-control" id="taskInput" placeholder="Текст задачи" required>
-						<small id="emailHelp" class="form-text text-muted">Что делаем, сколько времени тратим, какой результат получаем.</small>
-						<small id="checkboxHelp" class="form-text text-muted" > Нажмите на галочку для добавления нескольких задач.  </small>
-					</div>
-					<button type="submit" class="btn btn-primary  btn-lg active">Добавить</button>
-					<input class="form-group-checkbox" id="checkbox" name="checkbox" type="checkbox">
-					<label for="checkbox" ></label>
-				</form>
+				<div class="form-group">
+					<input maxlength="60" type="text" class="form-control" id="taskInput" placeholder="Текст задачи" required>
+					<small id="emailHelp" class="form-text text-muted">Что делаем, сколько времени тратим, какой результат получаем.</small>
+					<small id="checkboxHelp" class="form-text text-muted" > Нажмите на галочку для добавления нескольких задач.  </small>
+				</div>
+				<button type="submit" class="btn btn-primary button-add-tasks btn-lg active">Добавить</button>
+				<input class="form-group-checkbox" id="checkbox" name="checkbox" type="checkbox">
+				<label for="checkbox" ></label>
 			</div>
 		</div>
 		<div class="completed-tasks">

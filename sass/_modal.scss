@@ -167,34 +167,17 @@
             }
         }
         &__item{
-            text-align: left;
-            word-break: break-all;
             padding: 10px;
-            list-style: none;
+            list-style: none;   
             border: 1px solid #fff;         
             margin-bottom: 10px;       
             border-radius: 0.25rem;
             display: flex;
             align-items: center;
             position: relative;
+            overflow: hidden;
             &:last-child{
                 margin-bottom: 100px;
-            }
-            textarea{
-                flex: 1;
-                cursor: text;
-                background: none;
-                border: none;
-                color: #fff;
-                padding: 5px;
-                flex: 1;
-                width: 100%;
-                resize: none;
-                max-height: 35px;
-                &:focus{
-                    outline: 1px solid #fff;
-                    border-radius: 0.25rem;
-                }
             }
         }
         &__svg{
@@ -204,23 +187,61 @@
             border: 1px solid #fff;
             border-radius: 50%;
             margin-right: 10px;
+            transition: 0.3s all;
             &:active{
                 transform: scale(0.9);
             }
             &:hover{
                 svg{
                     opacity: 1;
-                }                
-            }
-            &-active{
-                opacity: 1;
+                }
             }
             svg{
                 pointer-events: none;
-                transform: translate(4px, -4px);
+                transform: translate(0px, -4px);
                 opacity: 0;
+                path{
+                    stroke: white;
+                }
+            }
+          
+            &-active{
+                border: 1px solid green;
+                svg{
+                    opacity: 1;
+                    path{ stroke: green;}
+                }
             }
        }
+       &__comment{
+            background: none;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            pointer-events: none;
+            width: 100%;
+            &:focus{
+                outline: 1px solid white;
+            }
+        }
+        &__btns{
+            text-align: center;
+        }
+        &__edit{
+            border: none;
+            background: none;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            svg{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                path{
+                    stroke: white;
+                }
+            }
+        }
         &__title{
             width: 100%;
             overflow: hidden;

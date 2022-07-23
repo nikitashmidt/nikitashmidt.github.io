@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("form"),
+  const addBtnTasks = document.querySelector(".button-add-tasks"),
     taskInput = document.getElementById("taskInput"),
     tasksList = document.getElementById("tasksList"),
     btns = document.querySelector(".btns"),
@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     checkbox = document.getElementById("checkbox"),
     headerNumberTasks = document.querySelector(".header__number-tasks span"),
     clearBtn = document.querySelector('[data-action="clear"]');
-
   let tasks = [],
     completedTasks = [];
   if (localStorage.getItem("tasks"))
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   completedTasks.forEach((task) => renderCompletedTask(task));
   updateEmpty();
 
-  form.addEventListener("submit", addTask);
+  addBtnTasks.addEventListener("click", addTask);
   tasksList.addEventListener("click", deleteTask);
   tasksList.addEventListener("click", doneTask);
   tasksList.addEventListener("click", openModalComments);
@@ -279,9 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let newCompletedTasks = completedTasks.filter((task) => task.id === id);
     const task = newCompletedTasks.find((task) => task.id === id);
     task.done = !task.done;
-    for (let i = 0; newCompletedTasks.length > i; i++) {
-      tasks.push(newCompletedTasks[i]);
-    }
+    for (let i = 0; newCompletedTasks.length > i; i++) { tasks.push(newCompletedTasks[i]) }
     completedTasks = completedTasks.filter((task) => task.id !== id);
     const taskHTML = `<li id="${parentNode.id}" class="list-group-item d-flex justify-content-between task-item">
     <span class="task-title" data-action='task-title'> ${parentNode.children[0].textContent}  </span>
@@ -332,6 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     transition("-50%");
     trackingAddInput();
     trackingEditTitle(id, eventTarget);
+    doneComments(id);
   }
   function submitForm(id) {
     modalCommentsAdd.onclick = function (e) {
@@ -387,14 +385,24 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         } else {
           item.comments.forEach((item) => {
+            const cssClass = item.done ? "modal-comments__comment  comments-done" : 'modal-comments__comment';
+            const ccsClassSvg = item.done ? 'modal-comments__svg modal-comments__svg-active' : 'modal-comments__svg';
             let newItem = `
             <li id="${item.id}" class="modal-comments__item">
-              <div class="modal-comments__svg" data-action="modal-comments-svg">
+              <div class="${ccsClassSvg}" data-action="modal-comments-svg" data-action="modal-comments-svg">
                 <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="red" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <textarea  maxlength="60" type="text" value=''> ${item.text}</textarea>
+              <input type="text" class="${cssClass}" value="${item.text}"></input>
+              <div class="modal-comments__btns">
+                <button data-action="modal-edit" class="modal-comments__edit">
+                  <svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.4745 5.40801L18.5917 7.52524M17.8358 3.54289L12.1086 9.27005C11.8131 9.56562 11.6116 9.94206 11.5296 10.3519L11 13L13.6481 12.4704C14.0579 12.3884 14.4344 12.1869 14.7299 11.8914L20.4571 6.16423C21.181 5.44037 21.181 4.26676 20.4571 3.5429C19.7332 2.81904 18.5596 2.81903 17.8358 3.54289Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M19 15V18C19 19.1046 18.1046 20 17 20H6C4.89543 20 4 19.1046 4 18V7C4 5.89543 4.89543 5 6 5H9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
             </li>
             `;
             modalCommentsItems.insertAdjacentHTML("beforeend", newItem);
@@ -430,6 +438,23 @@ document.addEventListener("DOMContentLoaded", () => {
     xDown = null;
     yDown = null;
   }
+  function doneComments(id) {
+    modalComments.onclick = function (e) {
+      if (e.target.dataset.action !== 'modal-comments-svg') return;
+      e.target.classList.toggle('modal-comments__svg-active');
+      e.target.parentNode.children[1].classList.toggle('comments-done');
+      const parentNode = e.target.parentNode;
+      const idComment = +e.target.parentNode.id;
+      tasks.forEach(item => {
+        if (item.id === id) {
+          item.comments.forEach(item => {
+            if (item.id === idComment) {
+              item.done = !item.done;
+            }
+          })
+        }
+      })
+      updateLocalStorage();
+    }
+  }
 });
-
-  

@@ -12,7 +12,6 @@
 @import './task';
 @import './checkbox';
 
-
 html, body {
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
@@ -73,6 +72,10 @@ body {
   text-decoration: line-through;
   color: #CDCDCD;
 }
+.comments-done{
+  color: green;
+  text-decoration: line-through;
+}
 .task-item__buttons {
   display: flex;
   column-gap: 5px;
@@ -113,7 +116,7 @@ body {
     opacity: 0.5;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;  
 }
 .btn-action {
   transition: 0.3s all;
@@ -125,7 +128,6 @@ body {
       transform: scale(0.9);
     }
 }
-
 .btn-action img {
   pointer-events: none;
 }
@@ -147,6 +149,7 @@ body {
     margin-bottom: 5px;
     background-color: #fff;
     resize: none;
+    display: flex;
     &-delete{
         transform: translateY(-1000px);
     }
