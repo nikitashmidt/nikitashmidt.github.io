@@ -700,6 +700,7 @@
 }
 
 .modal-comments__delete svg {
+  pointer-events: none;
   -webkit-transition: 0.3s all;
   transition: 0.3s all;
   fill: white;

@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   emptyTrashBtn.addEventListener("click", emptyTrash);
   completedTasksLists.addEventListener("click", returnTasks);
   modalComments.addEventListener('click', editDoneComments);
+  modalComments.addEventListener('click', deleteComments);
   window.document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && overlay.classList.contains("overlay-active"))
       closeModal();
@@ -70,10 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
   //         }, 400)
   //     }, 1000)
   // }
-  // setInterval(() => {
-    let now = new Date();
-    headerTime.innerHTML = `${now.toLocaleDateString()}  `;
-  // }, 1000);
+  let now = new Date();
+  headerTime.innerHTML = `${now.toLocaleDateString()}`;
 
   function addTask(e) {
     e.preventDefault();
@@ -109,9 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modalDeleteSpan.innerHTML = `${spanText}`;
     overlay.classList.add("overlay-active");
     modalDelete.classList.add("modal-delete-active");
-    modalDeleteBtn.addEventListener(
-      "click",
-      (e) => {
+    modalDeleteBtn.addEventListener("click", (e) => {
         tasks = tasks.filter((task) => task.id !== id);
         parentNode.classList.add("list-group-item-delete");
         setTimeout(() => {
@@ -322,7 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".modal-comments__title").value = `${e.target.textContent.trim()}`;
     document.querySelector(".modal-comments__date").textContent = `${newTasks.date}`;
     document.querySelector(".modal-comments__time").textContent = `${newTasks.time}`;
-    renderComments(id);
+    setTimeout(() => {
+      renderComments(id);
+    }, 200);
     submitForm(id);
     disableScroll();
     transition("-50%");
@@ -492,13 +491,12 @@ document.addEventListener("DOMContentLoaded", () => {
       parentNode.onchange = function (e) {
         let value = e.target.value;
         let id = +eTarget.parentNode.parentNode.id;
-        tasks.map((item) => {
+        tasks.forEach((item) => {
           item.comments.forEach(item => {
             if (item.id === id) {
               item.text = value;
             }
           })  
-          
         });
         updateLocalStorage()
       }
@@ -510,5 +508,13 @@ document.addEventListener("DOMContentLoaded", () => {
     e.target.parentNode.children[0].classList.remove('none');
     e.target.parentNode.parentNode.children[1].disabled = true;
   }
-  
+  function deleteComments(e) {
+    if (e.target.dataset.action !== 'modal-comments-delete') return;
+    let id = +e.target.parentNode.parentNode.id;
+    tasks.forEach((item) => {
+      console.log(item.comments)
+    })
+    console.log('true')
+    updateLocalStorage();
+  }
 });

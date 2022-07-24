@@ -148,7 +148,6 @@
             @include tablet{
                 top: 50%;
                 width: 100%;
-                // left: 50%;
             }
         }
         hr{
@@ -246,6 +245,7 @@
             padding: 0;
             cursor: pointer;
             svg {
+                pointer-events: none;
                 transition: 0.3s all;
                 fill: white;
             }
