@@ -186,7 +186,7 @@
             height: 20px;
             border: 1px solid #fff;
             border-radius: 50%;
-            margin-right: 10px;
+            // margin-right: 10px;
             transition: 0.3s all;
             &:active{
                 transform: scale(0.9);
@@ -221,10 +221,10 @@
             margin-right: 10px;
             width: 100%;
             flex: 1;
-            word-break:break-all;
+            // word-break:break-all;
             padding: 5px 10px;
             &:focus{
-                outline: 1px solid #fff;
+                outline: none;
             }
         }
         &__btns{

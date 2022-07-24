@@ -71,6 +71,7 @@ body {
 .task-title--done {
   text-decoration: line-through;
   color: #CDCDCD;
+  pointer-events: none;
 }
 .comments-done{
   color: green;
@@ -140,7 +141,7 @@ body {
   pointer-events: none;
 }
 .none {
-  display: none ;
+  display: none;
 }
 .float-right {
   float: right;
