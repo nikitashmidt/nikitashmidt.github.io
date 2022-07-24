@@ -563,8 +563,8 @@
 @media (max-width: 992px) {
   .modal-comments {
     top: 50%;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    width: 0%;
     height: 100% !important;
   }
 }
@@ -577,7 +577,8 @@
 
 @media (max-width: 992px) {
   .modal-comments-active {
-    left: 50%;
+    top: 50%;
+    width: 100%;
   }
 }
 
@@ -687,6 +688,29 @@
 
 .modal-comments__redact svg path:first-child {
   stroke: green;
+}
+
+.modal-comments__delete {
+  border: none;
+  background: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.modal-comments__delete svg {
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+  fill: white;
+}
+
+.modal-comments__delete:hover svg {
+  fill: red;
+}
+
+.modal-comments__delete:focus {
+  outline: none;
 }
 
 .modal-comments__edit, .modal-comments__redact {

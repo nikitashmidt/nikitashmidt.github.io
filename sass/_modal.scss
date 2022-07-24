@@ -138,15 +138,17 @@
         }
         @include tablet{
             top: 50%;
-            left: 0;
-            width: 100%;
+            left: 50%;
+            width: 0%;
             height: 100% !important;
         }
         &-active{
             @include visibleElem;
             top: 50%;
             @include tablet{
-                left: 50%;
+                top: 50%;
+                width: 100%;
+                // left: 50%;
             }
         }
         hr{
@@ -235,6 +237,26 @@
                 }
             }
            }
+        }
+        &__delete{
+            border: none;
+            background: none;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            cursor: pointer;
+            svg {
+                transition: 0.3s all;
+                fill: white;
+            }
+            &:hover{
+                svg{
+                    fill: red;
+                }
+            }
+            &:focus{
+                outline: none;
+            }
         }
         &__edit, &__redact{
             border: none;
