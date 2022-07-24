@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     taskInput = document.getElementById("taskInput"),
     tasksList = document.getElementById("tasksList"),
     btns = document.querySelector(".btns"),
-    emptyList = document.querySelector("#emptyList"),
+    emptyList = document.getElementById("emptyList"),
     emptyListTitle = document.querySelector(".empty-list__title"),
     openModalBtn = document.querySelector(".btn-open-modal"),
     modal = document.querySelector(".modal-task"),
@@ -322,9 +322,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".modal-comments__title").value = `${e.target.textContent.trim()}`;
     document.querySelector(".modal-comments__date").textContent = `${newTasks.date}`;
     document.querySelector(".modal-comments__time").textContent = `${newTasks.time}`;
-    setTimeout(() => {
-      modalCommentsInput.focus();
-    }, 200);
+    // setTimeout(() => {
+    //   modalCommentsInput.focus();
+    // }, 200);
     renderComments(id);
     submitForm(id);
     disableScroll();
@@ -373,8 +373,13 @@ document.addEventListener("DOMContentLoaded", () => {
     modalCommentsTitle.onchange = function (e) {
       tasks.map((item) => {
         if (item.id === id) {
-          item.text = `${e.target.value}`;
-          eventTarget.textContent = `${e.target.value}`;
+          if (e.target.value.length === 0) { 
+            item.text = item.text;
+            eventTarget.textContent =  item.text;
+          } else {
+            item.text = `${e.target.value}`;
+            eventTarget.textContent = `${e.target.value}`;
+          }
         }
       });
       updateLocalStorage();
@@ -481,6 +486,17 @@ document.addEventListener("DOMContentLoaded", () => {
       parentNode.disabled = false;
       parentNode.focus();
       parentNode.setSelectionRange(parentNode.value.length, parentNode.value.length);
+      console.log(parentNodeChildren)
+      parentNode.onchange = function (e) {
+        let value = e.target.value;
+        tasks.map((item) => {
+          if (item.id === id) {
+            // console.log(item)
+          }
+        });
+        updateLocalStorage()
+        // console.log(e.target.value)  
+      }
     })
   }
   function editDoneComments(e) {
@@ -488,6 +504,6 @@ document.addEventListener("DOMContentLoaded", () => {
     e.target.classList.add('none');
     e.target.parentNode.children[0].classList.remove('none');
     e.target.parentNode.parentNode.children[1].disabled = true;
-    console.log(e.target.parentNode.parentNode.children[1])
   }
+  
 });

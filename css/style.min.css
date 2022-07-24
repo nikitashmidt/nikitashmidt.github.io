@@ -668,7 +668,6 @@
   color: white;
   border: none;
   border-radius: 4px;
-  margin-right: 10px;
   width: 100%;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -1117,6 +1116,7 @@ body {
 @media (max-width: 576px) {
   .container {
     padding: 0;
+    padding-bottom: 5px;
   }
 }
 
@@ -1251,7 +1251,7 @@ body {
 }
 
 .none {
-  display: none;
+  display: none !important;
 }
 
 .float-right {

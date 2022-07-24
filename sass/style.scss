@@ -51,6 +51,7 @@ body {
   }
   @include mobile {
     padding: 0;
+    padding-bottom: 5px;
   }
   &-animation{
     opacity: 1;
@@ -141,7 +142,7 @@ body {
   pointer-events: none;
 }
 .none {
-  display: none;
+  display: none !important;
 }
 .float-right {
   float: right;
