@@ -70,10 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //         }, 400)
   //     }, 1000)
   // }
-  setInterval(() => {
+  // setInterval(() => {
     let now = new Date();
-    headerTime.innerHTML = `${now.toLocaleDateString()} ${now.toLocaleTimeString()} `;
-  }, 1000);
+    headerTime.innerHTML = `${now.toLocaleDateString()}  `;
+  // }, 1000);
 
   function addTask(e) {
     e.preventDefault();
@@ -322,9 +322,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".modal-comments__title").value = `${e.target.textContent.trim()}`;
     document.querySelector(".modal-comments__date").textContent = `${newTasks.date}`;
     document.querySelector(".modal-comments__time").textContent = `${newTasks.time}`;
-    // setTimeout(() => {
-    //   modalCommentsInput.focus();
-    // }, 200);
     renderComments(id);
     submitForm(id);
     disableScroll();
@@ -375,7 +372,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (item.id === id) {
           if (e.target.value.length === 0) { 
             item.text = item.text;
-            eventTarget.textContent =  item.text;
+            eventTarget.textContent = item.text;
+            console.log(eventTarget)
           } else {
             item.text = `${e.target.value}`;
             eventTarget.textContent = `${e.target.value}`;
@@ -469,9 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tasks.forEach(item => {
         if (item.id === id) {
           item.comments.forEach(item => {
-            if (item.id === idComment) {
-              item.done = !item.done;
-            }
+            if (item.id === idComment) item.done = !item.done;
           })
         }
       })
@@ -493,13 +489,16 @@ document.addEventListener("DOMContentLoaded", () => {
       parentNode.disabled = false;
       parentNode.focus();
       parentNode.setSelectionRange(parentNode.value.length, parentNode.value.length);
-      console.log(parentNodeChildren)
       parentNode.onchange = function (e) {
         let value = e.target.value;
+        let id = +eTarget.parentNode.parentNode.id;
         tasks.map((item) => {
-          if (item.id === id) {
-            console.log(item)
-          }
+          item.comments.forEach(item => {
+            if (item.id === id) {
+              item.text = value;
+            }
+          })  
+          
         });
         updateLocalStorage()
       }
