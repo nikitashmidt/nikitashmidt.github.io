@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
   emptyTrashBtn.addEventListener("click", emptyTrash);
   completedTasksLists.addEventListener("click", returnTasks);
   modalComments.addEventListener('click', editDoneComments);
-  modalComments.addEventListener('click', deleteComments);
   window.document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && overlay.classList.contains("overlay-active"))
       closeModal();
@@ -313,6 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.dataset.action !== "task-title") return;
     overlay.classList.add("overlay-active");
     document.querySelector(".modal-comments").classList.add("modal-comments-active");
+    document.querySelectorAll(".modal-comments__item").forEach((item) => item.remove());
     let id = +e.target.parentNode.id;
     let eventTarget = e.target;
     const newTasks = tasks.find((item) => item.id === id);
@@ -321,14 +321,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".modal-comments__time").textContent = `${newTasks.time}`;
     setTimeout(() => {
       renderComments(id);
-    }, 200);
+      doneComments(id);
+    }, 300);
     submitForm(id);
     disableScroll();
     transition("-50%");
     trackingAddInput();
     trackingEditTitle(id, eventTarget);
-    doneComments(id);
     editComments(id);
+    setTimeout(() => {
+      deleteComments(eventTarget);
+   }, 200)
   }
   function submitForm(id) {
     modalCommentsAdd.onclick = function (e) {
@@ -372,7 +375,6 @@ document.addEventListener("DOMContentLoaded", () => {
           if (e.target.value.length === 0) { 
             item.text = item.text;
             eventTarget.textContent = item.text;
-            console.log(eventTarget)
           } else {
             item.text = `${e.target.value}`;
             eventTarget.textContent = `${e.target.value}`;
@@ -494,9 +496,14 @@ document.addEventListener("DOMContentLoaded", () => {
         tasks.forEach((item) => {
           item.comments.forEach(item => {
             if (item.id === id) {
-              item.text = value;
+              if (value.length === 0) { 
+                item.text = item.text;
+                e.target.value = item.text;
+              } else {
+                item.text = value;
+              }
             }
-          })  
+          })
         });
         updateLocalStorage()
       }
@@ -508,13 +515,12 @@ document.addEventListener("DOMContentLoaded", () => {
     e.target.parentNode.children[0].classList.remove('none');
     e.target.parentNode.parentNode.children[1].disabled = true;
   }
-  function deleteComments(e) {
-    if (e.target.dataset.action !== 'modal-comments-delete') return;
-    let id = +e.target.parentNode.parentNode.id;
-    tasks.forEach((item) => {
-      console.log(item.comments)
-    })
-    console.log('true')
-    updateLocalStorage();
+  function deleteComments(eventTarget) {
+    modalComments.onclick = function (e) {
+      if (e.target.dataset.action !== 'modal-comments-delete') return;
+      let id = +e.target.parentNode.parentNode.id;
+        // let findIndex = tasks[0].comments.findIndex(item => item.id === id);
+      updateLocalStorage()
+    }
   }
 });
